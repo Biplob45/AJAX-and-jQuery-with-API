@@ -1,0 +1,30 @@
+First : <input type="text" id="first">
+Last : <input type="text" id="last">
+
+<div id="myBtn"><a href="">Click Me</a></div>
+<div id="output"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myBtn a').click(function (e) {
+            var url = 'php.php';
+            e.preventDefault();
+            $.ajax({
+                url: url
+                , type: 'POST'
+                , data : {"fname":$("#first").val(),"lname":$("#last").val()}
+                , dataType: 'json'
+                , success: function (data) {
+                        console.log(data);
+                        $('#output').append('<br>' + data.fname + '  '+ data.lname+ '  '+ data.response );
+                }
+                , error: function (data) {
+                    console.log(data);
+                    $('#output').append('<br>' + data.statusText);
+                }
+            })
+        })
+    })
+</script>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    
+    <div id="app">
+        <h3>Total confirmed: {{confirmed}}</h3>
+        <h3>Total recovered: {{recovered}}</h3>
+        <h3>Total deaths: {{deaths}}</h3>
+    </div>
+    
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                confirmed: '',
+                recovered: '',
+                deaths: ''
+            },
+            created: function(){
+                //formatNumber for number formating.  Ex. 2,145
+                function formatNumber(num) {
+                  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+                }
+                axios.get('https://covid.codeofamdad.com/api/stats')
+                .then(res => {
+                        //console.log(res.data.total.confirmed);
+                        //this.confirmed = res.data.total.confirmed
+                        this.confirmed = formatNumber(res.data.total.confirmed)
+                        this.recovered = formatNumber(res.data.total.recovered)
+                        this.deaths = formatNumber(res.data.total.deaths)
+                    //res function make response from the server.
+                    })
+            }
+        })
+    </script>
+    
+    
+    
+</body>
+</html>

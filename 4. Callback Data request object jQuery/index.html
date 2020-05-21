@@ -1,0 +1,20 @@
+<div id="myBtn"><a href="">Click Me</a></div>
+<div id="output"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    $('#myBtn a').click(function(e){
+        var url = 'test.php';
+        e.preventDefault();
+        console.log('clicked');
+        $('#output').load(url, function(responseText,status,xhr){
+            console.log(responseText);
+            console.log(status);
+            console.log(xhr);
+        });
+    
+    })
+
+
+</script>

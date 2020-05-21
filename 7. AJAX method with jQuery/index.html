@@ -1,0 +1,40 @@
+<div id="myBtn"><a href="">Click Me</a></div>
+<div id="output"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+    
+$(document).ready(function(){ //DOM
+    $('#myBtn a').click(function(e){
+        var url = 'test.php';
+        e.preventDefault();
+        
+        $.ajax(url, {
+            success:function(data){
+                console.log(data);
+                $('#output').append('<br> It works');
+            }
+            ,error:function(data){
+                console.log(data);
+                $('#output').append('<br>'+data.statusText);
+        }
+        })
+        
+        /*console.log('clicked');
+        $('#output').load(url, function(responseText,status,xhr){
+            console.log(responseText);
+            console.log(status);
+            console.log(xhr);
+            if(status=='success'){
+                $('#output').append('<br>it works');
+            }
+                  if(status=='error'){
+                    $('#output').append('<br>Error');
+                }
+        });*/
+    
+    })
+})
+
+</script>
